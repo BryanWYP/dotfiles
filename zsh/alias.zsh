@@ -30,18 +30,9 @@ man() {
         LESS_TERMCAP_ue=$(printf "\e[0m") \
         man "$@"
 }
+plugins=(
+    	git
+	zsh-autosuggestions
+	extract
+)
 
-# git
-alias ga="git add ."
-alias gc="git commit -m"
-alias gp="git push"
-alias gl="git log --graph --oneline --decorate "
-
-# tmux
-alias tl="tmux ls"
-alias ta="tmux attach -t"
-alias tk="tmux kill-session -t"
-alias tn="tmux new -s"
-
-# misc
-alias python="python3"

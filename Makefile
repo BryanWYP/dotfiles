@@ -5,7 +5,7 @@ export XDG_CONFIG_HOME = $(HOME)/.config
 export XDG_CACHE_HOME = $(HOME)/.cache
 export XDG_STATE_HOME = $(HOME)/.local/state
 
-pc: server font kitty
+# pc: server font kitty
 
 server: pre gitconf zsh vim tmux custom
 
