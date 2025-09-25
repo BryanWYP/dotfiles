@@ -23,6 +23,7 @@ zsh:
 	mkdir -p $(XDG_STATE_HOME)/zsh
 	mkdir -p $(XDG_CACHE_HOME)/zsh
 	ln -sfn $(PWD)/zsh $(XDG_CONFIG_HOME)/zsh
+	ln -sf $(PWD)/zsh/zshrc $(HOME)/.zshrc
 	ln -sfn $(PWD)/zsh/.zshenv ~/.zshenv
 
 vim:
