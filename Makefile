@@ -27,7 +27,8 @@ zsh:
 
 vim:
 	mkdir -p $(XDG_CONFIG_HOME)/vim
-	ln -sfn $(PWD)/vimrc $(XDG_CONFIG_HOME)/vim/vimrc
+	# ln -sfn $(PWD)/vim/vimrc $(XDG_CONFIG_HOME)/vim/.vimrc
+	ln -sfn $(PWD)/vim/vimrc $(HOME)/.vimrc
 
 custom:
 	if [ -f custom.sh ]; then \
