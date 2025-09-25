@@ -43,7 +43,8 @@ conda:
 	rm ./Miniconda3-latest-Linux-x86_64.sh.1
 
 tmux:
-	ln -sfn $(PWD)/tmux $(XDG_CONFIG_HOME)/tmux
+	# ln -sfn $(PWD)/tmux $(XDG_CONFIG_HOME)/tmux
+	ln -sf $(PWD)/tmux/tmux.conf $(HOME)/.tmux.conf
 
 font:
 	mkdir -p $(XDG_CONFIG_HOME)/fontconfig
