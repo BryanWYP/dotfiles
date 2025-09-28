@@ -30,7 +30,8 @@ vim:
 	mkdir -p $(XDG_CONFIG_HOME)/vim
 	# ln -sfn $(PWD)/vim/vimrc $(XDG_CONFIG_HOME)/vim/.vimrc
 	ln -sfn $(PWD)/vim/vimrc $(HOME)/.vimrc
-
+	# if vim-plug has not been installed, run the command below
+	# curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 custom:
 	if [ -f custom.sh ]; then \
 		./custom.sh; \

@@ -1,6 +1,7 @@
 call plug#begin()
 
     Plug 'tpope/vim-fugitive'
+    Plug 'ojroques/vim-oscyank', {'branch': 'main'}
 
 call plug#end()
 
@@ -34,7 +35,7 @@ filetype indent on
 set autoindent
 " Set tab to be 2 spaces
 set noexpandtab
-set tabstop=8 shiftwidth=8 softtabstop=8
+set tabstop=4 shiftwidth=4 softtabstop=4
 
 
 " The backspace key has slightly unintuitive behavior by default. For example,
@@ -74,11 +75,7 @@ nnoremap <Left>  :echoe "Use h"<CR>
 nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up>    :echoe "Use k"<CR>
 nnoremap <Down>  :echoe "Use j"<CR>
-nnoremap - <End>
-inoremap <Left>  <ESC>:echoe "Use h"<CR>
-inoremap <Right> <ESC>:echoe "Use l"<CR>
-inoremap <Up>    <ESC>:echoe "Use k"<CR>
-inoremap <Down>  <ESC>:echoe "Use j"<CR>
 inoremap jj <ESC>l
-nnoremap <C-j> <C-d>
-nnoremap <C-k> <C-u>
+nmap <leader>c <Plug>OSCYankOperator
+nmap <leader>cc <leader>c_
+vmap <leader>c <Plug>OSCYankVisual 
