@@ -70,12 +70,16 @@ set noerrorbells visualbell t_vb=
 " sometimes be convenient.
 set mouse+=a
 
+" Clipboard setting, add for GUI server with +clipboard
+set clipboard=unnamed
+" add for server with -clipboard
+nmap y <Plug>OSCYankOperator
+nmap yy y_
+vmap y <Plug>OSCYankVisual 
+
 " prevent bad habits 
 nnoremap <Left>  :echoe "Use h"<CR>
 nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up>    :echoe "Use k"<CR>
 nnoremap <Down>  :echoe "Use j"<CR>
 inoremap jj <ESC>l
-nmap <leader>y <Plug>OSCYankOperator
-nmap <leader>yy <leader>y_
-vmap <leader>y <Plug>OSCYankVisual 
