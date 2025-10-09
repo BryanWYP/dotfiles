@@ -104,9 +104,13 @@ alias vi="vim"
 alias zr="vim ~/.zshrc"
 alias vr="vim ~/.vimrc"
 alias ll="ls -al"
+alias sshc="vim ~/.ssh/config"
 
-# Mac-os Specfic Configure 
+# export http_proxy=http://ipads:ipads123@202.120.40.82:11235 
+# export https_proxy=http://ipads:ipads123@202.120.40.82:11235 
+# export no_proxy=localhost,127.0.0.1
 
+# Mac-os Specfic Configure
 # export PATH=/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/mysql/bin:$GOROOT/bin:$JAVA_HOME/bin:$HDC_PATH:/usr/local/texlive/2025/bin/universal-darwin
 # export HOMEBREW_NO_INSTALL_CLEANUP=TRUE
 
