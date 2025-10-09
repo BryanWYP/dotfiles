@@ -2,6 +2,8 @@ call plug#begin()
 
     Plug 'tpope/vim-fugitive'
     Plug 'ojroques/vim-oscyank', {'branch': 'main'}
+	Plug 'preservim/nerdtree'
+	Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
 
 call plug#end()
 
@@ -73,9 +75,9 @@ set mouse+=a
 " Clipboard setting, add for GUI server with +clipboard
 set clipboard=unnamed
 " add for server with -clipboard
-nmap y <Plug>OSCYankOperator
-nmap yy y_
-vmap y <Plug>OSCYankVisual 
+" nmap y <Plug>OSCYankOperator
+" nmap yy y_
+" vmap y <Plug>OSCYankVisual 
 
 " prevent bad habits 
 nnoremap <Left>  :echoe "Use h"<CR>
@@ -83,3 +85,27 @@ nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up>    :echoe "Use k"<CR>
 nnoremap <Down>  :echoe "Use j"<CR>
 inoremap jj <ESC>l
+
+" NERDTree keymapping
+" ctrl + w + h/l	光标 focus 左侧/右侧
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR> 
+" 让 NERDTree 在 Vim 启动时自动打开（如果没有文件）
+autocmd VimEnter * if !argc() | NERDTree | endif
+" 如果只剩下 NERDTree 窗口，自动退出 Vim
+autocmd BufEnter * if winnr('$') == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree() | quit | endif
+" 打开时刷新 NERDTree 状态（自动显示新建文件）
+autocmd BufWritePost * NERDTreeRefreshRoot
+" NERDTree 默认行为定制
+let NERDTreeQuitOnOpen=1          " 打开文件后自动关闭树窗口
+let NERDTreeShowHidden=1          " 显示隐藏文件（.开头）
+let NERDTreeMinimalUI=1           " 精简 UI
+let NERDTreeDirArrows=1           " 使用箭头符号指示目录
+
+" Makedown-Preview
+" normal/insert
+nmap <C-s> <Plug>MarkdownPreview
+nmap <M-s> <Plug>MarkdownPreviewStop
+nmap <C-p> <Plug>MarkdownPreviewToggle

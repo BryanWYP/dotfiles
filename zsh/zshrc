@@ -82,11 +82,6 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-# Mac OS Configure 
-
-# export PATH=/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/mysql/bin:$GOROOT/bin:$JAVA_HOME/bin:$HDC_PATH:/usr/local/texlive/2025/bin/universal-darwin
-# export HOMEBREW_NO_INSTALL_CLEANUP=TRUE
-
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
@@ -106,5 +101,13 @@ fi
 #
 # Example aliases
 alias vi="vim"
-alias zshconfig="mate ~/.zshrc"
-alias ohmyzsh="mate ~/.oh-my-zsh"
+alias zr="vim ~/.zshrc"
+alias vr="vim ~/.vimrc"
+alias ll="ls -al"
+
+# Mac-os Specfic Configure 
+
+# export PATH=/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/mysql/bin:$GOROOT/bin:$JAVA_HOME/bin:$HDC_PATH:/usr/local/texlive/2025/bin/universal-darwin
+# export HOMEBREW_NO_INSTALL_CLEANUP=TRUE
+
+# alias ssh="TERM=xterm-256color ssh"
