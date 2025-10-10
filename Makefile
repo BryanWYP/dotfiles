@@ -1,9 +1,17 @@
-.PHONY: gitconf zsh vim custom tmux font kitty
+.PHONY: gitconf zsh vim custom tmux font kitty xdg-dirs
 
 export XDG_DATA_HOME = $(HOME)/.local/share
 export XDG_CONFIG_HOME = $(HOME)/.config
 export XDG_CACHE_HOME = $(HOME)/.cache
 export XDG_STATE_HOME = $(HOME)/.local/state
+
+xdg-dirs:
+	@echo "Checking and creating XDG directories if needed..."
+	@mkdir -p "$(XDG_DATA_HOME)" \
+	          "$(XDG_CONFIG_HOME)" \
+	          "$(XDG_CACHE_HOME)" \
+	          "$(XDG_STATE_HOME)"
+	@echo "All XDG directories are ready."
 
 gitconf:
 	mkdir -p $(XDG_CONFIG_HOME)/git
@@ -29,8 +37,12 @@ custom:
 	fi
 
 tmux:
-	# ln -sfn $(PWD)/tmux $(XDG_CONFIG_HOME)/tmux
-	ln -sf $(PWD)/tmux/tmux.conf $(HOME)/.tmux.conf
+	ln -sfn $(PWD)/tmux $(XDG_CONFIG_HOME)/tmux
+	git clone https://github.com/tmux-plugins/tpm $(PWD)/tmux/plugins/tpm
+	ln -sf $(PWD)/tmux/tmux.conf $(XDG_CONFIG_HOME)/tmux/.tmux.conf
+	# ln -sf $(PWD)/tmux/tmux.conf $(HOME)/.tmux.conf
+
+
 
 font:
 	mkdir -p $(XDG_CONFIG_HOME)/fontconfig
