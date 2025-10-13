@@ -123,7 +123,7 @@ export https_proxy=http://ipads:ipads123@202.120.40.82:11235
 export no_proxy=localhost,127.0.0.1
 
 # Mac-os Specfic Configure
-# export PATH=/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/mysql/bin:$GOROOT/bin:$JAVA_HOME/bin:$HDC_PATH:/usr/local/texlive/2025/bin/universal-darwin
-# export HOMEBREW_NO_INSTALL_CLEANUP=TRUE
+export PATH=/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/mysql/bin:$GOROOT/bin:$JAVA_HOME/bin:$HDC_PATH:/usr/local/texlive/2025/bin/universal-darwin:/usr/local/nvim-macos-arm64/bin
+export HOMEBREW_NO_INSTALL_CLEANUP=TRUE
 
-# alias ssh="TERM=xterm-256color ssh"
+alias ssh="TERM=xterm-256color ssh"
