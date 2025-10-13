@@ -1,1 +1,4 @@
 custom.sh
+zsh/.zcompdump*
+tmux/.tmux.conf
+zsh/.zsh_history
