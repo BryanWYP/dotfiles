@@ -1,4 +1,4 @@
-.PHONY: gitconf zsh vim custom tmux font kitty xdg-dirs
+.PHONY: gitconf zsh vim custom tmux font kitty xdg-dirs root-config
 
 export XDG_DATA_HOME = $(HOME)/.local/share
 export XDG_CONFIG_HOME = $(HOME)/.config
@@ -52,3 +52,7 @@ font:
 kitty:
 	ln -sfn $(PWD)/kitty $(XDG_CONFIG_HOME)/kitty
 
+root-config:
+	ln -sfnd /home/bryan/.config $(HOME)/.config
+	ln -sfnd /home/bryan/.local $(HOME)/.local
+	ln -sf $(PWD)/zsh/zshrc $(HOME)/.zshrc
