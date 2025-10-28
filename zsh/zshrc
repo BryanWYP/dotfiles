@@ -8,7 +8,7 @@ export ZSH="$HOME/.config/zsh/.oh-my-zsh"
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="bira"
+ZSH_THEME="crunch"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -123,9 +123,9 @@ alias ga="git add"
 alias gc="git commit -m"
 alias python="python3"
 
-export http_proxy=http://ipads:ipads123@202.120.40.82:11235 
-export https_proxy=http://ipads:ipads123@202.120.40.82:11235 
-export no_proxy=localhost,127.0.0.1
+# export http_proxy=http://ipads:ipads123@202.120.40.82:11235 
+# export https_proxy=http://ipads:ipads123@202.120.40.82:11235 
+# export no_proxy=localhost,127.0.0.1
 
 # Server Specfic Configure
 export PATH=/home/bryan/venv/myenv/bin:$PATH
