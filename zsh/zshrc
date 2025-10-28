@@ -78,6 +78,7 @@ plugins=(
 	z
 )
 
+
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -132,6 +133,8 @@ alias vid="vi ~/codefile/note/diary/2025.10.md"
 # export https_proxy=http://ipads:ipads123@202.120.40.82:11235 
 # export no_proxy=localhost,127.0.0.1
 
+# General Configure
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5795ff,bg=gray,bold,underline"
 # Server Specfic Configure
 # export PATH=/home/bryan/venv/myenv/bin:$PATH
 
