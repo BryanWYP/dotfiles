@@ -102,12 +102,23 @@ fi
 #
 # Example aliases
 
+# General Configure
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5795ff,bg=gray,bold,underline"
+# Server Specfic Configure
+# export PATH=/home/bryan/venv/myenv/bin:$PATH
+# export PATH=/home/santongding/CodeSpace/RecaLLMem-new/toolchains/aarch64/bin:$PATH
+
+# Mac-os Specfic Configure
+export PATH=:/Users/bryan/venv/bin:/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/mysql/bin:$GOROOT/bin:$JAVA_HOME/bin:$HDC_PATH:/usr/local/texlive/2025/bin/universal-darwin:/usr/local/nvim-macos-arm64/bin
+export HOMEBREW_NO_INSTALL_CLEANUP=TRUE
+
+alias ssh="TERM=xterm-256color ssh"
+
+
 #Other config
 # Setup fzf
 unalias z
-if [[ ! "$PATH" == */home/santongding/.fzf/bin* ]]; then
-  PATH="${PATH:+${PATH}:}/home/santongding/.fzf/bin"
-fi
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 source <(fzf --zsh) 
 # Setup zoxide
@@ -141,15 +152,4 @@ alias python="python3"
 # export https_proxy=http://ipads:ipads123@202.120.40.82:11235 
 # export no_proxy=localhost,127.0.0.1
 
-# General Configure
-export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5795ff,bg=gray,bold,underline"
-# Server Specfic Configure
-# export PATH=/home/bryan/venv/myenv/bin:$PATH
-# export PATH=/home/santongding/CodeSpace/RecaLLMem-new/toolchains/aarch64/bin:$PATH
-
-# Mac-os Specfic Configure
-export PATH=:/Users/bryan/venv/bin:/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/mysql/bin:$GOROOT/bin:$JAVA_HOME/bin:$HDC_PATH:/usr/local/texlive/2025/bin/universal-darwin:/usr/local/nvim-macos-arm64/bin
-export HOMEBREW_NO_INSTALL_CLEANUP=TRUE
-
-alias ssh="TERM=xterm-256color ssh"
 
