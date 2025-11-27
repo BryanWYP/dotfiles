@@ -102,6 +102,17 @@ fi
 #
 # Example aliases
 
+#Other config
+# Setup fzf
+unalias z
+if [[ ! "$PATH" == */home/santongding/.fzf/bin* ]]; then
+  PATH="${PATH:+${PATH}:}/home/santongding/.fzf/bin"
+fi
+
+source <(fzf --zsh) 
+# Setup zoxide
+eval "$(zoxide init zsh)"
+
 # file modify
 alias vi="nvim"
 alias nv="nvim"
@@ -116,18 +127,15 @@ alias cdnv="cd ~/.config/nvim"
 alias cddot="cd ~/codefile/dotfiles"
 
 # app alias
+alias cd="z "
 alias tm="tmux"
 alias tml="tmux ls"
 alias tma="tmux attach"
 alias gs="git status"
 alias ga="git add"
 alias gc="git commit -m"
+alias lg="lazygit"
 alias python="python3"
-
-# PATH alias
-alias oh="cd ~/codefile/OpenHarmony-5.0.0-Release-origin"
-alias cdd="cd ~/codefile/note/diary"
-alias vid="vi ~/codefile/note/diary/2025.10.md"
 
 # export http_proxy=http://ipads:ipads123@202.120.40.82:11235
 # export https_proxy=http://ipads:ipads123@202.120.40.82:11235 
@@ -137,9 +145,11 @@ alias vid="vi ~/codefile/note/diary/2025.10.md"
 export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5795ff,bg=gray,bold,underline"
 # Server Specfic Configure
 # export PATH=/home/bryan/venv/myenv/bin:$PATH
+# export PATH=/home/santongding/CodeSpace/RecaLLMem-new/toolchains/aarch64/bin:$PATH
 
 # Mac-os Specfic Configure
 export PATH=:/Users/bryan/venv/bin:/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/mysql/bin:$GOROOT/bin:$JAVA_HOME/bin:$HDC_PATH:/usr/local/texlive/2025/bin/universal-darwin:/usr/local/nvim-macos-arm64/bin
 export HOMEBREW_NO_INSTALL_CLEANUP=TRUE
 
 alias ssh="TERM=xterm-256color ssh"
+
