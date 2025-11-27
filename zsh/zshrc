@@ -102,9 +102,16 @@ fi
 #
 # Example aliases
 
-# Other config
+#Other config
+# Setup fzf
+unalias z
+if [[ ! "$PATH" == */home/santongding/.fzf/bin* ]]; then
+  PATH="${PATH:+${PATH}:}/home/santongding/.fzf/bin"
+fi
+
+source <(fzf --zsh) 
+# Setup zoxide
 eval "$(zoxide init zsh)"
-source <(fzf --zsh)
 
 # file modify
 alias vi="nvim"
@@ -120,6 +127,7 @@ alias cdnv="cd ~/.config/nvim"
 alias cddot="cd ~/codefile/dotfiles"
 
 # app alias
+alias cd="z "
 alias tm="tmux"
 alias tml="tmux ls"
 alias tma="tmux attach"
@@ -128,11 +136,6 @@ alias ga="git add"
 alias gc="git commit -m"
 alias lg="lazygit"
 alias python="python3"
-
-# PATH alias
-alias oh="cd ~/codefile/OpenHarmony-5.0.0-Release-origin"
-# alias cdd="cd ~/codefile/note/diary"
-# alias vid="vi ~/codefile/note/diary/2025.10.md"
 
 # export http_proxy=http://ipads:ipads123@202.120.40.82:11235
 # export https_proxy=http://ipads:ipads123@202.120.40.82:11235 
