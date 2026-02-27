@@ -1,4 +1,4 @@
-.PHONY: gitconf zsh vim custom tmux font kitty xdg-dirs root-config
+.PHONY: gitconf zsh nvim custom tmux font kitty xdg-dirs root-config
 
 export XDG_DATA_HOME = $(HOME)/.local/share
 export XDG_CONFIG_HOME = $(HOME)/.config
@@ -18,18 +18,30 @@ gitconf:
 	ln -sfn $(PWD)/gitconfig $(XDG_CONFIG_HOME)/git/config
 
 zsh:
+	@if [ "$$(basename $$SHELL)" != "zsh" ]; then \
+		echo "Current shell is not zsh. Changing default shell to zsh..."; \
+		chsh -s "$$(command -v zsh)"; \
+	else \
+		echo "Current shell is already zsh."; \
+	fi
 	mkdir -p $(XDG_STATE_HOME)/zsh
 	mkdir -p $(XDG_CACHE_HOME)/zsh
 	ln -sfn $(PWD)/zsh $(XDG_CONFIG_HOME)/zsh
 	ln -sf $(PWD)/zsh/zshrc $(HOME)/.zshrc
 	ln -sfn $(PWD)/zsh/.zshenv ~/.zshenv
 
-vim:
-	mkdir -p $(XDG_CONFIG_HOME)/vim
-	# ln -sfn $(PWD)/vim/vimrc $(XDG_CONFIG_HOME)/vim/.vimrc
-	ln -sfn $(PWD)/vim/vimrc $(HOME)/.vimrc
-	# if vim-plug has not been installed, run the command below
-	# curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+nvim:
+	@if ! command -v nvim >/dev/null 2>&1; then \
+		echo "Neovim not installed. Downloading AppImage..."; \
+		mkdir -p $(HOME)/.local/bin; \
+		curl -L -o $(HOME)/.local/bin/nvim https://github.com/neovim/neovim/releases/download/v0.11.4/nvim-linux-x86_64.appimage; \
+		chmod +x $(HOME)/.local/bin/nvim; \
+		echo "Neovim downloaded mapping to $(HOME)/.local/bin/nvim."; \
+		echo "Please ensure $(HOME)/.local/bin is in your PATH in zshrc."; \
+	else \
+		echo "Neovim is already installed."; \
+	fi
+
 
 custom:
 	if [ -f custom.sh ]; then \
@@ -53,6 +65,4 @@ kitty:
 	ln -sfn $(PWD)/kitty $(XDG_CONFIG_HOME)/kitty
 
 root-config:
-	ln -sfnd /home/bryan/.config $(HOME)/.config
-	ln -sfnd /home/bryan/.local $(HOME)/.local
 	ln -sf $(PWD)/zsh/zshrc $(HOME)/.zshrc
