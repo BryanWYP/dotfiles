@@ -29,23 +29,23 @@ zsh:
 		echo "Current shell is already zsh."; \
 	fi
 	@# 2. 判断并安装 oh-my-zsh (非交互式安装，不更改shell设置，不跳转进入zsh)
-	@if [ ! -d "$(HOME)/.oh-my-zsh" ]; then \
+	@if [ ! -d "$(XDG_CONFIG_HOME)/zsh/.oh-my-zsh" ]; then \
 		echo "Oh-My-Zsh not found. Installing Oh-My-Zsh..."; \
 		env KEEP_ZSHRC=yes CHSH=no RUNZSH=no sh -c "$$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"; \
 	else \
 		echo "Oh-My-Zsh is already installed."; \
 	fi
 	@# 3. 判断并安装 zsh-autosuggestions 插件
-	@if [ ! -d "$(HOME)/.oh-my-zsh/custom/plugins/zsh-autosuggestions" ]; then \
+	@if [ ! -d "$(XDG_CONFIG_HOME)/zsh/.oh-my-zsh/plugins/zsh-autosuggestions" ]; then \
 		echo "Installing zsh-autosuggestions..."; \
-		git clone https://github.com/zsh-users/zsh-autosuggestions $(XDG_CACHE_HOME)/zsh/.oh-my-zsh/custom/plugins/zsh-autosuggestions; \
+		git clone https://github.com/zsh-users/zsh-autosuggestions $(XDG_CONFIG_HOME)/zsh/.oh-my-zsh/plugins/zsh-autosuggestions; \
 	else \
 		echo "zsh-autosuggestions is already installed."; \
 	fi
 	@# 4. 判断并安装 zsh-syntax-highlighting 插件
-	@if [ ! -d "$(HOME)/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting" ]; then \
+	@if [ ! -d "$(XDG_CONFIG_HOME)/zsh/.oh-my-zsh/plugins/zsh-syntax-highlighting" ]; then \
 		echo "Installing zsh-syntax-highlighting..."; \
-		git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $(XDG_CACHE_HOME)/zsh/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting; \
+		git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $(XDG_CONFIG_HOME)/zsh/.oh-my-zsh/plugins/zsh-syntax-highlighting; \
 	else \
 		echo "zsh-syntax-highlighting is already installed."; \
 	fi
