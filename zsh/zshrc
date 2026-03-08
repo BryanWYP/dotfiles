@@ -53,7 +53,6 @@ alias vi="nvim"
 alias zr="nvim ~/.zshrc"
 
 # app alias
-alias cd="z "
 alias tm="tmux"
 alias tml="tmux ls"
 alias tma="tmux attach"
