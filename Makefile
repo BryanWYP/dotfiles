@@ -61,7 +61,6 @@ zsh:
 	fi
 
 	ln -sf $(PWD)/zsh/zshrc $(HOME)/.zshrc
-	ln -sfn $(PWD)/zsh/zshenv ~/.zshenv
 
 nvim:
 	@if ! command -v nvim >/dev/null 2>&1; then \
