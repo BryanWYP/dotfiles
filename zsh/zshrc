@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
 # Path to your Oh My Zsh installation.
-export ZSH="$HOME/.config/zsh/.oh-my-zsh"
+export ZSH="$XDG_CONFIG_HOME/zsh/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
@@ -31,8 +31,6 @@ export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5795ff,bg=gray,bold,underline"
 alias ssh="TERM=xterm-256color ssh"
 
 # Server Specfic Configure
-# export PATH=~/venv/bin:$PATH
-
 
 # Mac-os Specfic Configure
 # export PATH=:/Users/bryan/venv/bin:/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/mysql/bin:$GOROOT/bin:$JAVA_HOME/bin:$HDC_PATH:/usr/local/texlive/2025/bin/universal-darwin:/usr/local/nvim-macos-arm64/bin
@@ -41,10 +39,8 @@ alias ssh="TERM=xterm-256color ssh"
 
 #Other config
 # Setup fzf
-unalias z
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-source <(fzf --zsh) 
 # Setup zoxide
 eval "$(zoxide init zsh)"
 
@@ -55,19 +51,24 @@ alias zr="nvim ~/.zshrc"
 # app alias
 alias tm="tmux"
 alias tml="tmux ls"
-alias tma="tmux attach"
+alias tma="tmux attach -t"
 alias gs="git status"
 alias ga="git add"
 alias gc="git commit -m"
 alias lg="lazygit"
 alias python="python3"
 
-# export http_proxy=http://ipads:ipads123@202.120.40.82:11235
-# export https_proxy=http://ipads:ipads123@202.120.40.82:11235 
+export http_proxy=http://ipads:ipads123@202.120.40.82:11235
+export https_proxy=http://ipads:ipads123@202.120.40.82:11235 
 # export no_proxy=localhost,127.0.0.1
-# export HF_ENDPOINT=https://hf-mirror.com
-
+export HF_ENDPOINT=https://hf-mirror.com
 
 # Claude Code API Router configuration
-export ANTHROPIC_BASE_URL="https://moacode.org"
-export ANTHROPIC_AUTH_TOKEN="cr_d9bce7f539df5068853b95e82981628789f087f434c9e4857d9dc00656cddcd0"
+# export ANTHROPIC_BASE_URL="https://moacode.org"
+# export ANTHROPIC_AUTH_TOKEN="cr_d9bce7f539df5068853b95e82981628789f087f434c9e4857d9dc00656cddcd0"
+
+# Claude Code Environment Variables
+export ANTHROPIC_BASE_URL="https://api.aicodemirror.com/api/claudecode"
+export ANTHROPIC_API_KEY="sk-ant-api03-ZW2sSpEn5Qw6YpDNlum5zPJrtXMtZSyfq21d4pPOUi85seQ9ienWGVPLiUdqIS6vyJ2mjo9-AxgOGlXBG9l7iQ"
+export ANTHROPIC_AUTH_TOKEN="sk-ant-api03-ZW2sSpEn5Qw6YpDNlum5zPJrtXMtZSyfq21d4pPOUi85seQ9ienWGVPLiUdqIS6vyJ2mjo9-AxgOGlXBG9l7iQ"
+# End Claude Code Environment Variables

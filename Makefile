@@ -1,4 +1,4 @@
-.PHONY: server git xdg-dirs zsh nvim tmux font kitty xdg-dirs root-config fzf lazygit
+.PHONY: server mac git xdg-dirs zsh nvim tmux font kitty fzf lazygit zoxide
 
 export XDG_DATA_HOME = $(HOME)/.local/share
 export XDG_CONFIG_HOME = $(HOME)/.config
@@ -28,31 +28,40 @@ zsh:
 	else \
 		echo "Current shell is already zsh."; \
 	fi
-	@# 2. 判断并安装 oh-my-zsh (非交互式安装，不更改shell设置，不跳转进入zsh)
+
+	@# 2. 创建 ~/.config/zsh 软链接（必须先于 oh-my-zsh 安装，以确保安装路径正确）
+	@if [ -d "$(XDG_CONFIG_HOME)/zsh" ] && [ ! -L "$(XDG_CONFIG_HOME)/zsh" ]; then \
+		echo "Warning: $(XDG_CONFIG_HOME)/zsh is a real directory, removing..."; \
+		rm -rf "$(XDG_CONFIG_HOME)/zsh"; \
+	fi
+	ln -sfn $(PWD)/zsh $(XDG_CONFIG_HOME)/zsh
+
+	@# 3. 判断并安装 oh-my-zsh 到 ~/.config/zsh/.oh-my-zsh (非交互式安装，不更改shell设置，不跳转进入zsh)
 	@if [ ! -d "$(XDG_CONFIG_HOME)/zsh/.oh-my-zsh" ]; then \
 		echo "Oh-My-Zsh not found. Installing Oh-My-Zsh..."; \
-		env KEEP_ZSHRC=yes CHSH=no RUNZSH=no sh -c "$$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"; \
+		env ZSH=$(XDG_CONFIG_HOME)/zsh/.oh-my-zsh KEEP_ZSHRC=yes CHSH=no RUNZSH=no sh -c "$$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"; \
 	else \
 		echo "Oh-My-Zsh is already installed."; \
 	fi
-	@# 3. 判断并安装 zsh-autosuggestions 插件
-	@if [ ! -d "$(XDG_CONFIG_HOME)/zsh/.oh-my-zsh/plugins/zsh-autosuggestions" ]; then \
+
+	@# 4. 判断并安装 zsh-autosuggestions 插件
+	@if [ ! -d "$(XDG_CONFIG_HOME)/zsh/.oh-my-zsh/custom/plugins/zsh-autosuggestions" ]; then \
 		echo "Installing zsh-autosuggestions..."; \
-		git clone https://github.com/zsh-users/zsh-autosuggestions $(XDG_CONFIG_HOME)/zsh/.oh-my-zsh/plugins/zsh-autosuggestions; \
+		git clone https://github.com/zsh-users/zsh-autosuggestions $(XDG_CONFIG_HOME)/zsh/.oh-my-zsh/custom/plugins/zsh-autosuggestions; \
 	else \
 		echo "zsh-autosuggestions is already installed."; \
 	fi
-	@# 4. 判断并安装 zsh-syntax-highlighting 插件
-	@if [ ! -d "$(XDG_CONFIG_HOME)/zsh/.oh-my-zsh/plugins/zsh-syntax-highlighting" ]; then \
+
+	@# 5. 判断并安装 zsh-syntax-highlighting 插件
+	@if [ ! -d "$(XDG_CONFIG_HOME)/zsh/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting" ]; then \
 		echo "Installing zsh-syntax-highlighting..."; \
-		git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $(XDG_CONFIG_HOME)/zsh/.oh-my-zsh/plugins/zsh-syntax-highlighting; \
+		git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $(XDG_CONFIG_HOME)/zsh/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting; \
 	else \
 		echo "zsh-syntax-highlighting is already installed."; \
 	fi
 
-	ln -sfn $(PWD)/zsh $(XDG_CONFIG_HOME)/zsh
 	ln -sf $(PWD)/zsh/zshrc $(HOME)/.zshrc
-	ln -sfn $(PWD)/zsh/.zshenv ~/.zshenv
+	ln -sfn $(PWD)/zsh/zshenv ~/.zshenv
 
 nvim:
 	@if ! command -v nvim >/dev/null 2>&1; then \
@@ -90,16 +99,40 @@ fzf:
 		echo "fzf is already installed."; \
 	fi
 
+zoxide:
+	@if ! command -v zoxide >/dev/null 2>&1; then \
+		echo "zoxide not found. Installing zoxide..."; \
+		curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh; \
+	else \
+		echo "zoxide is already installed."; \
+	fi
+
+
 tmux:
 	ln -sfn $(PWD)/tmux $(XDG_CONFIG_HOME)/tmux
-	git clone https://github.com/tmux-plugins/tpm $(PWD)/tmux/plugins/tpm
-	ln -sf $(PWD)/tmux/tmux.conf $(XDG_CONFIG_HOME)/tmux/.tmux.conf
-	# ln -sf $(PWD)/tmux/tmux.conf $(HOME)/.tmux.conf
+	@if [ ! -d "$(PWD)/tmux/plugins/tpm" ]; then \
+		git clone https://github.com/tmux-plugins/tpm $(PWD)/tmux/plugins/tpm; \
+	else \
+		echo "tpm is already installed."; \
+	fi
 	
 lazygit:
-	echo "[WARN]: You need to install lazygit manually"
+	@if ! command -v lazygit >/dev/null 2>&1; then \
+		echo "lazygit not found. Installing lazygit..."; \
+		mkdir -p $(HOME)/.local/bin; \
+		LAZYGIT_VERSION=$$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": *"v\K[^"]*'); \
+		curl -Lo /tmp/lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/download/v$${LAZYGIT_VERSION}/lazygit_$${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"; \
+		tar -xzf /tmp/lazygit.tar.gz -C /tmp lazygit; \
+		install /tmp/lazygit $(HOME)/.local/bin/lazygit; \
+		rm /tmp/lazygit.tar.gz /tmp/lazygit; \
+		echo "lazygit installed to $(HOME)/.local/bin/lazygit"; \
+	else \
+		echo "lazygit is already installed."; \
+	fi
 
-server: xdg-dir szsh nvim tmux fzf lazygit
+server: xdg-dirs zsh nvim tmux fzf zoxide lazygit
+
+mac: xdg-dirs zsh font kitty
 
 # Mac or front configuration setting
 
