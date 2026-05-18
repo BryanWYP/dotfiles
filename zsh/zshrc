@@ -1,83 +1,23 @@
-# If you come from bash you might have to change your $PATH.
 export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_STATE_HOME="$HOME/.local/state"
 
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
-export PATH="$HOME/.local/bin:/usr/local/bin:$PATH"
+export ZSH_CONFIG_ROOT="$ZDOTDIR"
+export ZSH_MACHINE_NAME="${ZSH_MACHINE_NAME:-${HOST%%.*}}"
 
-# Path to your Oh My Zsh installation.
-export ZSH="$XDG_CONFIG_HOME/zsh/.oh-my-zsh"
-
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time Oh My Zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="crunch"
-
-plugins=(
-	git
-	zsh-autosuggestions
-	extract
-	zsh-syntax-highlighting
-	z
-)
-
-
-source $ZSH/oh-my-zsh.sh
-
-# Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-   export EDITOR='vim'
+if [[ -z "$ZSH_MACHINE_NAME" ]]; then
+  export ZSH_MACHINE_NAME="$(hostname -s 2>/dev/null || hostname 2>/dev/null)"
 fi
 
-# General Configure
-export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#5795ff,bg=gray,bold,underline"
-alias ssh="TERM=xterm-256color ssh"
+_zsh_safe_source() {
+  local file="$1"
+  [[ -r "$file" ]] && source "$file"
+}
 
-# Server Specfic Configure
+_zsh_safe_source "$ZSH_CONFIG_ROOT/config/general.zsh"
+_zsh_safe_source "$ZSH_CONFIG_ROOT/machines/$ZSH_MACHINE_NAME/public.zsh"
+_zsh_safe_source "$ZSH_CONFIG_ROOT/machines/$ZSH_MACHINE_NAME/secret.zsh"
 
-# Mac-os Specfic Configure
-# export PATH=:/Users/bryan/venv/bin:/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/mysql/bin:$GOROOT/bin:$JAVA_HOME/bin:$HDC_PATH:/usr/local/texlive/2025/bin/universal-darwin:/usr/local/nvim-macos-arm64/bin
-# export HOMEBREW_NO_INSTALL_CLEANUP=TRUE
-
-
-#Other config
-# Setup fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# Setup zoxide
-eval "$(zoxide init zsh)"
-
-# file modify
-alias vi="nvim"
-alias zr="nvim ~/.zshrc"
-
-# app alias
-alias tm="tmux"
-alias tml="tmux ls"
-alias tma="tmux attach -t"
-alias gs="git status"
-alias ga="git add"
-alias gc="git commit -m"
-alias lg="lazygit"
-alias python="python3"
-alias init_github="git config --local user.name 'BryanWYP' && git config --local user.email 'wyp1536481268@foxmail.com'"
-alias init_gitlab="git config --local user.name 'BryanWu' && git config --local user.email 'wyp1536481268@foxmail.com'"
-alias init_gitcode="git config --local user.name 'Bryan_Wu' && git config --local user.email 'wyp1536481268@foxmail.com'"
-
-export http_proxy=http://ipads:ipads123@202.120.40.82:11235
-export https_proxy=http://ipads:ipads123@202.120.40.82:11235 
-# export no_proxy=localhost,127.0.0.1
-export HF_ENDPOINT=https://hf-mirror.com
-
-# Claude Code API Router configuration
-# export ANTHROPIC_BASE_URL="https://moacode.org"
-# export ANTHROPIC_AUTH_TOKEN="cr_d9bce7f539df5068853b95e82981628789f087f434c9e4857d9dc00656cddcd0"
-
-# Claude Code Environment Variables
-export ANTHROPIC_BASE_URL="https://api.aicodemirror.com/api/claudecode"
-export ANTHROPIC_API_KEY="sk-ant-api03-ZW2sSpEn5Qw6YpDNlum5zPJrtXMtZSyfq21d4pPOUi85seQ9ienWGVPLiUdqIS6vyJ2mjo9-AxgOGlXBG9l7iQ"
-export ANTHROPIC_AUTH_TOKEN="sk-ant-api03-ZW2sSpEn5Qw6YpDNlum5zPJrtXMtZSyfq21d4pPOUi85seQ9ienWGVPLiUdqIS6vyJ2mjo9-AxgOGlXBG9l7iQ"
-# End Claude Code Environment Variables
+unset -f _zsh_safe_source

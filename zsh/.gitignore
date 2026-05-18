@@ -1,4 +1,5 @@
-.zcompdump
+.zcompdump*
+.zsh_history
 custom.zsh
 .oh-my-zsh
-
+machines/*/secret.zsh
