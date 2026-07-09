@@ -44,6 +44,7 @@ alias python="python3"
 alias init_github="git config --local user.name 'BryanWYP' && git config --local user.email 'wyp1536481268@foxmail.com'"
 alias init_gitlab="git config --local user.name 'BryanWu' && git config --local user.email 'wyp1536481268@foxmail.com'"
 alias init_gitcode="git config --local user.name 'Bryan_Wu' && git config --local user.email 'wyp1536481268@foxmail.com'"
+alias sjtu-vpn="ssh proxy -N"
 
 export HF_ENDPOINT="https://hf-mirror.com"
 
