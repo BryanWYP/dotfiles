@@ -8,7 +8,6 @@ plugins=(
   zsh-autosuggestions
   extract
   zsh-syntax-highlighting
-  z
 )
 
 if [[ -r "$ZSH/oh-my-zsh.sh" ]]; then
